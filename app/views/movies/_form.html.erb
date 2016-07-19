@@ -29,7 +29,13 @@
   </div>
   <div>
     <%= f.label :poster_image_url %><br>
-    <%= f.text_field :poster_image_url %>
+    <!-- <%= f.text_field :poster_image_url %> -->
+    <%= f.file_field :poster_image_url %>
+    <% if f.object.poster_image_url? %>
+      <%= image_tag f.object.poster_image_url.thumb.url %>
+      <%= f.label :remove_image %>
+      <%= f.check_box :remove_poster_image_url %>
+    <% end %>
   </div>
   <div>
     <%= f.label :description %><br>
