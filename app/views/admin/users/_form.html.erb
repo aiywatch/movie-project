@@ -1,0 +1,16 @@
+<%= form_for @user, url: admin_user_path(@user), html: { method: :patch } do |f| %>
+
+  <%= f.label :email %><br>
+  <%= f.text_field :email %><br>
+
+  <%= f.label :firstname %><br>
+  <%= f.text_field :firstname %><br>
+
+  <%= f.label :lastname %><br>
+  <%= f.text_field :lastname %><br>
+
+  <%= f.label :role %><br>
+  <%= f.text_field :role %><br>
+
+  <%= f.submit "Submit" %>
+<% end %>
