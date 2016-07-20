@@ -20,10 +20,9 @@ class Admin::UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
+    binding.pry
     if @user.save
-      session[:user_id] = @user.id
-      redirect_to movies_path, notice: "Welcome aboard, #{@user.firstname}!"
+      redirect_to admin_users_path, notice: "User created, #{@user.firstname}!"
     else
       render :new
     end
@@ -50,7 +49,7 @@ class Admin::UsersController < ApplicationController
   protected
     def user_params
       params.require(:user).permit(
-        :email, :firstname, :lastname, :role
+        :email, :firstname, :lastname, :password, :password_confirmation
       )
     end
 end
