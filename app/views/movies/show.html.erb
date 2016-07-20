@@ -13,7 +13,9 @@
       <% @movie.reviews.each do |review| %>
         <p><%= review.text %></p>
         <p><%= review.rating_out_of_ten %>/10</p>
-        <small>- <%= current_user.full_name %></small><br/>
+        <% @user = User.find(review.user_id) %>
+        <small>- <%= link_to @user.firstname, user_path(@user) %></small><br/>
+
       <% end %>
       <p><%= link_to "Write a review!", new_movie_review_path(@movie) %></p>
     <% else %>
