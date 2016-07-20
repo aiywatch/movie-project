@@ -23,8 +23,10 @@ class Movie < ApplicationRecord
 
   validate :release_date_is_in_the_past
 
-  scope :title, -> (title) { where("title LIKE ?", "%#{title}%") }
-  scope :director, -> (director) { where("director LIKE ?", "%#{director}%") }
+  # scope :title, -> (title) { where("title LIKE ?", "%#{title}%") }
+  # scope :director, -> (director) { where("director LIKE ?", "%#{director}%") }
+
+  scope :search_word, -> (search) { where("title LIKE ? OR director LIKE ?", "%#{search}%", "%#{search}%") }
   scope :duration, -> (duration) { where("runtime_in_minutes #{duration}") unless duration.nil?  }
 
 

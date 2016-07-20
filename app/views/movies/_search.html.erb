@@ -1,5 +1,10 @@
 <h3>Search movies</h3>
 <%= form_tag("/movies/search", method: "get") do %>
+
+  Search for
+  <%= text_field_tag(:search) %>
+  <br>
+
   <%= label_tag(:title, "title:") %>
   <%= text_field_tag(:title) %>
   <br>

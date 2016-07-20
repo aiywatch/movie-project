@@ -56,7 +56,11 @@ class MoviesController < ApplicationController
     #   @movies = @movies.where("runtime_in_minutes #{params[:runtime_in_minutes]}")
     # end
 
-    @movies = Movie.title(params[:title]).director(params[:director]).duration(params[:runtime_in_minutes])
+    # binding.pry
+    @movies = Movie.search_word(params[:search]).duration(params[:runtime_in_minutes])
+
+
+    # @movies = Movie.title(params[:title]).director(params[:director]).duration(params[:runtime_in_minutes])
 
     render :index
   end
