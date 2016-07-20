@@ -1,4 +1,10 @@
 class MoviesController < ApplicationController
+
+  # scope :title_search, -> { where("title LIKE ?", "%#{params[:title]}%") }
+  # scope :director_search, -> { where("director LIKE ?", "%#{params[:director]}%") }
+  # scope :duration_search, -> { where("runtime_in_minutes #{params[:runtime_in_minutes]}") unless params[:runtime_in_minutes].nil?  }
+
+
   def index
     @movies = Movie.all
   end
@@ -43,12 +49,15 @@ class MoviesController < ApplicationController
   end
 
   def search
-    @ss = params
-    @movies = Movie.where("title LIKE ?", "%#{params[:title]}%")
-    @movies = @movies.where("director LIKE ?", "%#{params[:director]}%")
-    unless params[:runtime_in_minutes].nil?
-      @movies = @movies.where("runtime_in_minutes #{params[:runtime_in_minutes]}")
-    end
+    # @ss = params
+    # @movies = Movie.where("title LIKE ?", "%#{params[:title]}%")
+    # @movies = @movies.where("director LIKE ?", "%#{params[:director]}%")
+    # unless params[:runtime_in_minutes].nil?
+    #   @movies = @movies.where("runtime_in_minutes #{params[:runtime_in_minutes]}")
+    # end
+
+    @movies = Movie.title(params[:title]).director(params[:director]).duration(params[:runtime_in_minutes])
+
     render :index
   end
 
