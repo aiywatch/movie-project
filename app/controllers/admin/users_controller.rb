@@ -31,7 +31,6 @@ class Admin::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-
     if @user.update_attributes(user_params)
       redirect_to admin_users_path, notice: "updated"
     else
@@ -40,7 +39,11 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
-    User.find(params[:id]).destroy
+    @user = User.find(params[:id])
+
+    UserMailer.delete_email(@user).deliver_later
+    @user.destroy
+
     redirect_to admin_users_path, notice: "deleted"
   end
 
