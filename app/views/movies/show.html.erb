@@ -1,4 +1,9 @@
-<%= link_to "Back to all movies", movies_path %><br/>
+<!-- <%= link_to "Back to all movies", movies_path %><br/> -->
+
+<section class="text-center">
+<article class="panel panel-primary">
+
+
 
 <%= link_to image_tag(@movie.poster_image_url.thumb.url), movie_path(@movie) %>
 <h2><%= @movie.title %> (<%= link_to "edit", edit_movie_path(@movie) %>, <%= link_to "delete", movie_path(@movie), method: :delete, data: {confirm: "You sure?"} %>)</h2>
@@ -6,18 +11,36 @@
 <h4>Dir. <%= @movie.director %> | <%= @movie.runtime_in_minutes %> munites</h4>
 <p><%= @movie.description %></p>
 
+</article>
+
 <hr>
 
 <h3>Reviews of <em><%= @movie.title %></em></h3>
     <% if current_user %>
       <% @movie.reviews.each do |review| %>
-        <p><%= review.text %></p>
+<!--         <p><%= review.text %></p>
         <p><%= review.rating_out_of_ten %>/10</p>
         <% @user = User.find(review.user_id) %>
-        <small>- <%= link_to @user.firstname, user_path(@user) %></small><br/>
+        <small>- <%= link_to @user.firstname, user_path(@user) %></small><br/> -->
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">
+      
+      <%= link_to @user.firstname, user_path(@user) %>
+      <%= review.rating_out_of_ten %>/10
+    </h3>
+  </div>
+  <div class="panel-body">
+
+    <%= review.text %>
+  </div>
+</div>
 
       <% end %>
       <p><%= link_to "Write a review!", new_movie_review_path(@movie) %></p>
     <% else %>
       <p>Please <%= link_to "log in", new_session_path %> to see reviews and add your own.</p> 
     <% end %>
+
+</section>

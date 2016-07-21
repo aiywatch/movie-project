@@ -1,0 +1,55 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Rotten Mangoes</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="#">Admin</a></li>
+
+      </ul>
+
+    <!-- Search Form -->
+    <%= form_tag("/movies/search", method: "get", class: "navbar-form navbar-left") do %>
+
+      <div class="form-group">
+        <%= text_field_tag(:search, "", class: "form-control", placeholder: "Search") %>
+
+        <%= select_tag(:runtime_in_minutes,
+          options_for_select([['duration', nil], ['Under 90 minutes', " < 90"], ['90 to 120', ' BETWEEN 90 AND 120'], ['more than 120', '> 120']]), class: "form-control" ) %>
+      </div>
+
+        <%= submit_tag("Search", class: "btn btn-default") %>
+    <% end %>
+
+
+      <ul class="nav navbar-nav navbar-right">
+        
+        
+      <% if current_user %>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= current_user.full_name %> <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Profile</a></li>
+
+            <% if current_user && current_user.role == "admin" %>
+              <li><%= link_to "Admin User Management", admin_users_path %></li>
+            <% end %>
+
+            <li role="separator" class="divider"></li>
+            <li><%= link_to "log out", session_path("current"), method: :delete %></li>
+          </ul>
+        </li>
+
+      <% else %>
+        <li><%= link_to "Log In", new_session_path %></li>
+        <li><%= link_to "Sign Up", new_user_path %></li>
+      <% end %>
+
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

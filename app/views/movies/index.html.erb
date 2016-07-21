@@ -1,9 +1,11 @@
-<h1>Rotten Mangoes</h1>
+<header>
+  <h1 class="text-center">Rotten Mangoes</h1>
+</header>
 
-<%= render 'search' %>
 
-<%= link_to "Submit a movie!", new_movie_path %>
-<hr>
+<!-- <%= render 'search' %> -->
+
+<%= link_to "Submit a movie!", new_movie_path, class: "btn btn-warning btn-lg center-block" %>
 
 <!-- <% @movies.each do |movie| %>
   <%= link_to image_tag(movie.poster_image_url.thumb.url), movie_path(movie) %>
@@ -14,4 +16,6 @@
   <hr>
 <% end %> -->
 
-<%= render @movies %>
+<table class="table">
+  <%= render @movies %>
+</table>
